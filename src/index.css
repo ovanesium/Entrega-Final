@@ -1,0 +1,12 @@
+.flex-nav {
+  display: flex;
+  align-items: center;
+  font-family: "Courier New", Courier, monospace;
+  justify-content: space-around;
+  color: rgb(0, 128, 6);
+  background-color: aqua;
+}
+
+.links {
+  color: black;
+}
