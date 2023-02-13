@@ -9,9 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { CartItem } from "./CartItem";
 import { CartOrderSummary } from "./CartOrderSummary";
-import { cartData } from "./_data";
 
-export const CartContainer = () => (
+export const CartContainer = ({ items }) => (
   <Box
     maxW={{
       base: "3xl",
@@ -50,12 +49,12 @@ export const CartContainer = () => (
         flex="2"
       >
         <Heading fontSize="2xl" fontWeight="extrabold">
-          Shopping Cart (3 items)
+          Carro de compras
         </Heading>
 
         <Stack spacing="6">
-          {cartData.map((item) => (
-            <CartItem key={item.id} {...item} />
+          {{ items }.map((item) => (
+            <CartItem key={item.title} {...item} />
           ))}
         </Stack>
       </Stack>

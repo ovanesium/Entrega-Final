@@ -5,15 +5,15 @@ import {
   Stack,
   Heading,
   Text,
-  Button,
   Center,
   Flex,
   Spacer,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import ItemCounter from "../ItemCounter";
+import AddToCart from "../AddToCart";
 
-const ItemDetail = ({ item, deleteProduct }) => {
+const ItemDetail = ({ item, objects, setObjects }) => {
   const [value, setValue] = useState(1);
   const handleChange = (value) => setValue(value);
 
@@ -38,13 +38,16 @@ const ItemDetail = ({ item, deleteProduct }) => {
             </Text>
           </Stack>
         </CardBody>
-        <Flex mb={2}>
+        <Flex mb={4}>
           <Spacer />
           <ItemCounter value={value} handleChange={handleChange} />
           <Spacer />
-          <Button variant="solid" colorScheme="green">
-            Agregar al carrito
-          </Button>
+          <AddToCart
+            objects={objects}
+            setObjects={setObjects}
+            title={item.title}
+            quantity={Number(value)}
+          />
           <Spacer />
         </Flex>
       </Card>
