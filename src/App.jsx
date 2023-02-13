@@ -5,12 +5,12 @@ import { Route, Routes } from "react-router-dom";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/NavBar/NavBar";
-import { CartContainer } from "./components/CartWithDivider/CartContainer.jsx";
 import { Center } from "@chakra-ui/react";
+import Cart from "./components/Cart/index.jsx";
 
 function App() {
   const [items, setItems] = useState([]);
-  const [currentCart, setCurrentCart] = useState([]);
+  const [objects, setObjects] = useState([]);
   const itemsCollectionRef = collection(db, "items");
   const [loading, setLoading] = useState(true);
 
@@ -28,6 +28,7 @@ function App() {
 
   useEffect(() => {
     getItems();
+    console.log(items);
   }, []);
 
   if (loading) {
@@ -48,7 +49,7 @@ function App() {
             <ItemListContainer
               items={items}
               setItems={setItems}
-              greeting={"Bienvenidos a Fast Food Asia"}
+              greeting={"Bienvenido a Fast Food Asia"}
             />
           }
         />
@@ -68,10 +69,21 @@ function App() {
             <ItemListContainer items={items} category={"comidacoreana"} />
           }
         />
-        <Route path="/items/:id" element={<ItemDetailContainer />} />
+        <Route
+          path="/items/:id"
+          element={
+            <ItemDetailContainer objects={objects} setObjects={setObjects} />
+          }
+        />
         <Route
           path="/cart"
-          element={<CartContainer deleteProduct={deleteProduct} />}
+          element={
+            <Cart
+              objects={objects}
+              items={items}
+              deleteProduct={deleteProduct}
+            />
+          }
         />
         <Route path="*" element={<h4>404</h4>} />
       </Routes>

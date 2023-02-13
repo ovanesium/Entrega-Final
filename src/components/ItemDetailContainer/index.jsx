@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import ItemDetail from "../ItemDetail";
 import { Center, Heading } from "@chakra-ui/react";
 
-const ItemDetailContainer = ({ deleteProduct }) => {
+const ItemDetailContainer = ({ objects, setObjects }) => {
   const { id } = useParams();
   const [item, setItem] = useState({});
   const [existe, setExiste] = useState(true);
@@ -27,7 +27,12 @@ const ItemDetailContainer = ({ deleteProduct }) => {
   return (
     <>
       {existe ? (
-        <ItemDetail item={item} deleteProduct={deleteProduct} key={item.id} />
+        <ItemDetail
+          item={item}
+          key={item.id}
+          objects={objects}
+          setObjects={setObjects}
+        />
       ) : (
         <Center mt={40}>
           <Heading> El item no existe </Heading>
