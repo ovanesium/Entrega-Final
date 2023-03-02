@@ -1,7 +1,7 @@
 import db from "../../db/firebase-config.js";
 import { collection, addDoc } from "firebase/firestore";
 import { useState } from "react";
-import { Container, Flex, Wrap, WrapItem } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 const Form = ({ cart }) => {
   const [inputNombre, setInputNombre] = useState("");
@@ -29,7 +29,7 @@ const Form = ({ cart }) => {
       `Felicidades por tu compra ${item.nombre}, el id de tu orden es ${docRef.id}`
     );
 
-    window.location.reload();
+    window.location.href = "/";
   };
 
   return (

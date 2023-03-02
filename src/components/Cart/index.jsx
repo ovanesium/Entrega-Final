@@ -1,6 +1,6 @@
 import {
+  Button,
   Center,
-  Container,
   Flex,
   Heading,
   Image,
@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-import Form from "../../Form";
+import { Link } from "react-router-dom";
 
 const Cart = ({ cart, items }) => {
   const filterByTitle = (lista, title) => {
@@ -22,6 +22,11 @@ const Cart = ({ cart, items }) => {
       acc + Number(filterByTitle(items, obj.title)[0].price) * obj.quantity,
     0
   );
+
+  const vaciarCarro = () => {
+    alert("Has vaciado el carrito con éxito");
+    window.location.href = "/";
+  };
 
   console.log(items);
 
@@ -65,7 +70,13 @@ const Cart = ({ cart, items }) => {
             <Spacer />
             <Text>$ {total}</Text>
           </Flex>
-          <Form cart={cart} />
+          <Flex alignItems={"center"} ml="30%" mr="30%" mt="10">
+            <Button onClick={vaciarCarro}>Vaciar Carrito</Button>
+            <Spacer />
+            <Link to="/checkout">
+              <Button colorScheme={"green"}>Ir al Checkout</Button>
+            </Link>
+          </Flex>
         </>
       )}
     </div>

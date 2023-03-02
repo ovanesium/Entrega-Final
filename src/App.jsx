@@ -7,6 +7,7 @@ import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/NavBar/NavBar";
 import { Center } from "@chakra-ui/react";
 import Cart from "./components/Cart/index.jsx";
+import Checkout from "./components/Checkout/index.jsx";
 
 const cartContext = createContext(null);
 
@@ -20,12 +21,6 @@ function App() {
     const querySnapshot = await getDocs(itemsCollectionRef);
     setItems(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     setLoading(false);
-  };
-
-  const deleteProduct = async (id) => {
-    const itemDocRef = doc(db, "items", id);
-    await deleteDoc(itemDocRef);
-    getItems();
   };
 
   useEffect(() => {
@@ -75,12 +70,8 @@ function App() {
             }
           />
           <Route path="/items/:id" element={<ItemDetailContainer />} />
-          <Route
-            path="/cart"
-            element={
-              <Cart cart={cart} items={items} deleteProduct={deleteProduct} />
-            }
-          />
+          <Route path="/cart" element={<Cart cart={cart} items={items} />} />
+          <Route path="/checkout" element={<Checkout cart={cart} />} />
           <Route path="*" element={<h4>404</h4>} />
         </Routes>
       </div>
