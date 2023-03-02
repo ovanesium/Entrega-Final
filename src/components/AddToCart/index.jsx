@@ -1,25 +1,31 @@
 import { Button } from "@chakra-ui/react";
-import React from "react";
-import CartWidget from "../CartWidget/CartWidget";
+import React, { useContext } from "react";
+import { cartContext } from "../../App";
 
-const AddToCart = ({ objects, setObjects, title, quantity }) => {
+const AddToCart = ({ title, quantity }) => {
+  const { cart, setCart } = useContext(cartContext);
+
   const addObject = (e) => {
     e.preventDefault();
-    const objectIndex = objects.findIndex((obj) => obj.title === title);
-    if (objectIndex !== -1) {
-      const updatedObjects = [...objects];
-      updatedObjects[objectIndex].quantity += quantity;
-      setObjects(updatedObjects);
-      console.log(objects);
+    const cartIndex = cart.findIndex((obj) => obj.title === title);
+    if (cartIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[cartIndex].quantity += quantity;
+      setCart(updatedCart);
     } else {
-      setObjects([...objects, { title, quantity }]);
-      console.log(objects);
+      setCart([...cart, { title, quantity }]);
     }
+
+    const newCart = [...cart];
+    newCart[0].cant += quantity;
+    setTimeout(() => {
+      console.log(cart);
+    }, 2000);
   };
   return (
     <div>
       <form onSubmit={addObject}>
-        <Button type="submit" leftIcon={<CartWidget />} colorScheme={"green"}>
+        <Button type="submit" colorScheme={"green"}>
           Agregar ítem
         </Button>
       </form>

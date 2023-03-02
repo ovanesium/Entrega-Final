@@ -13,7 +13,7 @@ import { useState } from "react";
 import ItemCounter from "../ItemCounter";
 import AddToCart from "../AddToCart";
 
-const ItemDetail = ({ item, objects, setObjects }) => {
+const ItemDetail = ({ item }) => {
   const [value, setValue] = useState(1);
   const handleChange = (value) => setValue(value);
 
@@ -42,12 +42,7 @@ const ItemDetail = ({ item, objects, setObjects }) => {
           <Spacer />
           <ItemCounter value={value} handleChange={handleChange} />
           <Spacer />
-          <AddToCart
-            objects={objects}
-            setObjects={setObjects}
-            title={item.title}
-            quantity={Number(value)}
-          />
+          <AddToCart title={item.title} quantity={Number(value)} />
           <Spacer />
         </Flex>
       </Card>
